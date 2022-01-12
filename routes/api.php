@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AccountController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,3 +27,5 @@ Route::get('/ping', function (Request $request) {
 Route::post('/createUser', [UserController::class, 'createUser']);
 Route::post('/login', [UserController::class, 'login']);
 Route::post('/user/{userId}/avatar', [UserController::class, 'updateAvatar']);
+
+Route::get('/{accountNumber}/saldo', [AccountController::class, 'getSaldo']);
