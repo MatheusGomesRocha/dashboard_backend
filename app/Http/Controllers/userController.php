@@ -31,6 +31,11 @@ class userController extends Controller
             $create = DB::table('users')->insert($data);
 
             if($create) {
+                $createAccount = DB::table('accounts')->insert([
+                    'account_number' => $account,
+                    'saldo' => 0
+                ]);
+
                 return $this->response['result'] = 'Usuário cadastrado com sucesso';
             } else {
                 return $this->response['error'] = 'Ocorreu algum erro, tente novamente';
