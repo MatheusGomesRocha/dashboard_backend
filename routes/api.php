@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,3 +22,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('/ping', function (Request $request) {
     return ['pong'=>true];
 });
+
+Route::post('/createUser', [UserController::class, 'createUser']);
+Route::post('/login', [UserController::class, 'login']);
+Route::post('/user/{userId}/avatar', [UserController::class, 'updateAvatar']);
