@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\TransactionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,3 +30,7 @@ Route::post('/login', [UserController::class, 'login']);
 Route::post('/user/{userId}/avatar', [UserController::class, 'updateAvatar']);
 
 Route::get('/{accountNumber}/saldo', [AccountController::class, 'getSaldo']);
+
+Route::post('/{accountNumber}/deposit', [TransactionController::class, 'deposit']);
+Route::post('/{accountNumber}/withdraw', [TransactionController::class, 'withdraw']);
+Route::get('/{accountNumber}/transactions', [TransactionController::class, 'getAllTransactions']);

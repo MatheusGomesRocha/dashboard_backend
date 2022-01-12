@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Auth;
 
 class userController extends Controller
 {
+    private $response = ['error' => '', 'result' => []];
+    
     public function createUser(Request $request) {
         $hasUser = User::hasUser($request->input('cpf'));
 

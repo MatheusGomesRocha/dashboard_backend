@@ -18,8 +18,7 @@ class CreateTransactionsTable extends Migration
             $table->string('account_number');
             $table->foreign('account_number')->references('account')->on('users');
             $table->string('type');
-            $table->float('deposit');
-            $table->float('withdraw');
+            $table->float('value');
             $table->string('date');
             $table->timestamps();
         });
