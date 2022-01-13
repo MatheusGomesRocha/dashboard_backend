@@ -15,6 +15,7 @@ class transactionController extends Controller
         $value = $request->input('value');
         $date = now();
 
+
         $deposit = Transaction::deposit($type, $value, $accountNumber, $date);
 
         if($deposit) {
@@ -53,5 +54,19 @@ class transactionController extends Controller
 
     public function getAllTransactions($accountNumber) {
         return Transaction::getAllTransactions($accountNumber);
+    }
+
+    public function getTransactionsBetween(Request $request) {
+        $from = date($request->input('from'));
+        $to = date($request->input('to'));
+
+        if(strtotime($from) >= strtotime($to)) {
+            $query = DB::table('transactions')->whereBetween('date', [$from, $to])->get();
+            return $query;        
+        } else {
+            return 'Data inicial não pode ser maior que a data final';
+        }
+
+        
     }
 }

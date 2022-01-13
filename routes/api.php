@@ -34,3 +34,4 @@ Route::get('/{accountNumber}/saldo', [AccountController::class, 'getSaldo']);
 Route::post('/{accountNumber}/deposit', [TransactionController::class, 'deposit']);
 Route::post('/{accountNumber}/withdraw', [TransactionController::class, 'withdraw']);
 Route::get('/{accountNumber}/transactions', [TransactionController::class, 'getAllTransactions']);
+Route::post('/{accountNumber}/transactionsFilter', [TransactionController::class, 'getTransactionsBetween']);
