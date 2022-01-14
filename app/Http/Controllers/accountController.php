@@ -11,6 +11,12 @@ class accountController extends Controller
     private $response = ['error' => '', 'result' => []];
     
     public function getSaldo($accountNumber) {
-        return Account::getSaldo($accountNumber);
+        $saldo = Account::getSaldo($accountNumber);
+
+        if($saldo) {
+            return $saldo;
+        } else {
+            return $this->response['error'] = 'Ocorreu algum erro';
+        }
     }
 }

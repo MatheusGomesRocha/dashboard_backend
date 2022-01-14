@@ -37,6 +37,6 @@ class Transaction extends Model
     }
 
     public static function getAllTransactions($account) {
-        return DB::table('transactions')->where('account_number', '=', $account)->get();
+        return DB::table('transactions')->where('account_number', '=', $account)->orderBy('date', 'DESC')->orderBy('id', 'DESC')->get();
     }
 }

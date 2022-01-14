@@ -27,7 +27,6 @@ Route::get('/ping', function (Request $request) {
 
 Route::post('/createUser', [UserController::class, 'createUser']);
 Route::post('/login', [UserController::class, 'login']);
-Route::post('/user/{userId}/avatar', [UserController::class, 'updateAvatar']);
 
 Route::get('/{accountNumber}/saldo', [AccountController::class, 'getSaldo']);
 
@@ -35,3 +34,4 @@ Route::post('/{accountNumber}/deposit', [TransactionController::class, 'deposit'
 Route::post('/{accountNumber}/withdraw', [TransactionController::class, 'withdraw']);
 Route::get('/{accountNumber}/transactions', [TransactionController::class, 'getAllTransactions']);
 Route::post('/{accountNumber}/transactionsFilter', [TransactionController::class, 'getTransactionsBetween']);
+Route::get('/{accountNumber}/balanceHistory', [TransactionController::class, 'getBalanceHistory']);

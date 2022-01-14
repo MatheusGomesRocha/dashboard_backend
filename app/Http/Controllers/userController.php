@@ -14,9 +14,9 @@ class userController extends Controller
     
     public function createUser(Request $request) {
         $hasUser = User::hasUser($request->input('cpf'));
-
+        
         if($hasUser == 1) {
-            return $this->response['error'] = 'Usuário já cadastrado';
+             $this->response['error'] = ['Usuário já cadastrado'];
         } else {
             $randomNumber = rand(999999, 100000);
             $account = $randomNumber.'-'.rand(9, 1);
@@ -38,11 +38,13 @@ class userController extends Controller
                     'saldo' => 0
                 ]);
 
-                return $this->response['result'] = 'Usuário cadastrado com sucesso';
+                $this->response['result'] = 'Usuário cadastrado com sucesso';
             } else {
-                return $this->response['error'] = 'Ocorreu algum erro, tente novamente';
+                $this->response['error'] = 'Ocorreu algum erro, tente novamente';
             }
         }
+
+        return $this->response;
     }
 
     public function login(Request $request) {
@@ -60,40 +62,16 @@ class userController extends Controller
             if(Auth::check()) {
                 $userInfo = User::getUser($cpf);
 
-                return $this->response['result'] = [
+                $this->response['result'] = [
                     'id' => $userInfo->id,
+                    'avatar' => $userInfo->avatar,
+                    'name' => $userInfo->name,
                     'account' => $userInfo->account,
-                    'email' => $userInfo->email,
-                    'password' => $userInfo->password,
                 ];    
             }
             
         } else {
-            return $this->response['error'] = "Credenciais incorretas";
-        }
-    }
-
-    public function updateAvatar(Request $request, $userId) {
-        $image = $request->file('avatar');
-
-        if ($image) {
-            if ($request->hasFile('avatar') && $request->file('avatar')->isValid()) {
-                $img = rand();
-
-                $extensao = $request->file('avatar')->extension();
-                $file = "$img.$extensao";
-                $upload = $request->file('avatar')->storeAs('public/media/avatars/', $file);
-
-                DB::table('users')->where('id', '=', $userId)->update([
-                    'avatar' => $file,
-                ]);
-
-                $this->response['result'] = url('storage/media/avatars/' . $file);
-            } else {
-                $this->response['error'] = 'File not supported';
-            }
-        } else {
-            $this->response['error'] = 'Send a file';
+            $this->response['error'] = "Credenciais incorretas";
         }
 
         return $this->response;
