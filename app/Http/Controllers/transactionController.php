@@ -163,4 +163,8 @@ class transactionController extends Controller
         $data = array('sixDays' => $subtotalSixDays, 'fiveDays' => $subtotalFiveDays, 'fourDays' => $subtotalFourDays, 'threeDays' => $subtotalThreeDays, 'twoDays' => $subtotalTwoDays, 'yesterday' => $subtotalYesterday, 'today' => $subtotalToday);
         return $data;
     }
+
+    public function deleteTransactionHistory($accountNumber, $transactionId) {
+        return DB::table('transactions')->where('account_number', $accountNumber)->where('id', $transactionId)->delete();
+    }
 }

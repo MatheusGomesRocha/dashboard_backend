@@ -35,3 +35,4 @@ Route::post('/{accountNumber}/withdraw', [TransactionController::class, 'withdra
 Route::get('/{accountNumber}/transactions', [TransactionController::class, 'getAllTransactions']);
 Route::post('/{accountNumber}/transactionsFilter', [TransactionController::class, 'getTransactionsBetween']);
 Route::get('/{accountNumber}/balanceHistory', [TransactionController::class, 'getBalanceHistory']);
+Route::post('/{accountNumber}/{transactionId}/delete', [TransactionController::class, 'deleteTransactionHistory']);
